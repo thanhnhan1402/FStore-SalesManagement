@@ -9,6 +9,10 @@ namespace DataAccess.Repository
 {
     public interface IOrderRepository
     {
-
+        IEnumerable<Order> GetOrderList();
+        Order GetOrderByID(Order Order);
+        void InsertOrder(Order Order);
+        void UpdateOrder(Order Order);
+        void DeleteOrder(Order Order);
     }
 }

@@ -11,7 +11,7 @@ namespace DataAccess.Repository
     public interface IMemberRepository
     {
         IEnumerable<Member> GetMemberList();
-        Member GetMemberByID(int memID);
+        Member GetMemberByID(Member member);
         void InsertMember(Member member);
         void UpdateMember(Member member);
         void DeleteMember(Member member);
