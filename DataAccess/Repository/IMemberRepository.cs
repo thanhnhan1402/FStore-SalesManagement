@@ -1,4 +1,5 @@
-﻿using BusinessObject;
+﻿
+using DataAccess.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,10 +10,10 @@ namespace DataAccess.Repository
 {
     public interface IMemberRepository
     {
-        IEnumerable<MemberObject> GetMemberList();
-        MemberObject GetMemberByID(int memID);
-        void InsertMember(MemberObject member);
-        void UpdateMember(MemberObject member);
-        void DeleteMember(int memID);
+        IEnumerable<Member> GetMemberList();
+        Member GetMemberByID(int memID);
+        void InsertMember(Member member);
+        void UpdateMember(Member member);
+        void DeleteMember(Member member);
     }
 }
