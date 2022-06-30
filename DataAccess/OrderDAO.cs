@@ -91,8 +91,8 @@ namespace DataAccess
             {
                 using FStoreASM2Context Context = new FStoreASM2Context();
                 //find Order by id
-                var mem = GetOrderByID(order);
-                Context.Orders.Remove(mem);
+                var ord = GetOrderByID(order);
+                Context.Orders.Remove(ord);
                 Context.SaveChanges();
             }
             catch (Exception ex)
