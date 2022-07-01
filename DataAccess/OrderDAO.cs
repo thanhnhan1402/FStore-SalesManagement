@@ -33,7 +33,6 @@ namespace DataAccess
             {
                 using FStoreASM2Context fStore = new FStoreASM2Context();
                 Order = fStore.Orders.ToList();
-
             }
             catch (Exception ex)
             {
