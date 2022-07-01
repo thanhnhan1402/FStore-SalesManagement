@@ -30,18 +30,18 @@
         {
             this.lbOrderId = new System.Windows.Forms.Label();
             this.txtOrderId = new System.Windows.Forms.TextBox();
-            this.txtMemberId = new System.Windows.Forms.TextBox();
             this.lbMemberId = new System.Windows.Forms.Label();
-            this.txtOderDate = new System.Windows.Forms.TextBox();
             this.lbOrderDate = new System.Windows.Forms.Label();
-            this.txtRequiredDate = new System.Windows.Forms.TextBox();
             this.lbRequiredDate = new System.Windows.Forms.Label();
-            this.txtShippedDate = new System.Windows.Forms.TextBox();
             this.lbShippedDate = new System.Windows.Forms.Label();
             this.txtFreight = new System.Windows.Forms.TextBox();
             this.lbFreight = new System.Windows.Forms.Label();
             this.btnSave = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
+            this.dtpOrderDate = new System.Windows.Forms.DateTimePicker();
+            this.dtpRequiredDate = new System.Windows.Forms.DateTimePicker();
+            this.dtpShippedDate = new System.Windows.Forms.DateTimePicker();
+            this.cboMemberId = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // lbOrderId
@@ -60,13 +60,6 @@
             this.txtOrderId.Size = new System.Drawing.Size(164, 23);
             this.txtOrderId.TabIndex = 1;
             // 
-            // txtMemberId
-            // 
-            this.txtMemberId.Location = new System.Drawing.Point(111, 59);
-            this.txtMemberId.Name = "txtMemberId";
-            this.txtMemberId.Size = new System.Drawing.Size(164, 23);
-            this.txtMemberId.TabIndex = 3;
-            // 
             // lbMemberId
             // 
             this.lbMemberId.AutoSize = true;
@@ -75,13 +68,6 @@
             this.lbMemberId.Size = new System.Drawing.Size(66, 15);
             this.lbMemberId.TabIndex = 2;
             this.lbMemberId.Text = "Member ID";
-            // 
-            // txtOderDate
-            // 
-            this.txtOderDate.Location = new System.Drawing.Point(111, 92);
-            this.txtOderDate.Name = "txtOderDate";
-            this.txtOderDate.Size = new System.Drawing.Size(164, 23);
-            this.txtOderDate.TabIndex = 5;
             // 
             // lbOrderDate
             // 
@@ -92,13 +78,6 @@
             this.lbOrderDate.TabIndex = 4;
             this.lbOrderDate.Text = "Order Date";
             // 
-            // txtRequiredDate
-            // 
-            this.txtRequiredDate.Location = new System.Drawing.Point(111, 133);
-            this.txtRequiredDate.Name = "txtRequiredDate";
-            this.txtRequiredDate.Size = new System.Drawing.Size(164, 23);
-            this.txtRequiredDate.TabIndex = 7;
-            // 
             // lbRequiredDate
             // 
             this.lbRequiredDate.AutoSize = true;
@@ -107,13 +86,6 @@
             this.lbRequiredDate.Size = new System.Drawing.Size(81, 15);
             this.lbRequiredDate.TabIndex = 6;
             this.lbRequiredDate.Text = "Required Date";
-            // 
-            // txtShippedDate
-            // 
-            this.txtShippedDate.Location = new System.Drawing.Point(111, 170);
-            this.txtShippedDate.Name = "txtShippedDate";
-            this.txtShippedDate.Size = new System.Drawing.Size(164, 23);
-            this.txtShippedDate.TabIndex = 9;
             // 
             // lbShippedDate
             // 
@@ -148,6 +120,7 @@
             this.btnSave.TabIndex = 12;
             this.btnSave.Text = "Save";
             this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // btnCancel
             // 
@@ -158,29 +131,63 @@
             this.btnCancel.TabIndex = 13;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
+            // 
+            // dtpOrderDate
+            // 
+            this.dtpOrderDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dtpOrderDate.Location = new System.Drawing.Point(111, 100);
+            this.dtpOrderDate.Name = "dtpOrderDate";
+            this.dtpOrderDate.Size = new System.Drawing.Size(165, 23);
+            this.dtpOrderDate.TabIndex = 14;
+            // 
+            // dtpRequiredDate
+            // 
+            this.dtpRequiredDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dtpRequiredDate.Location = new System.Drawing.Point(111, 136);
+            this.dtpRequiredDate.Name = "dtpRequiredDate";
+            this.dtpRequiredDate.Size = new System.Drawing.Size(165, 23);
+            this.dtpRequiredDate.TabIndex = 15;
+            // 
+            // dtpShippedDate
+            // 
+            this.dtpShippedDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dtpShippedDate.Location = new System.Drawing.Point(110, 173);
+            this.dtpShippedDate.Name = "dtpShippedDate";
+            this.dtpShippedDate.Size = new System.Drawing.Size(165, 23);
+            this.dtpShippedDate.TabIndex = 16;
+            // 
+            // cboMemberId
+            // 
+            this.cboMemberId.FormattingEnabled = true;
+            this.cboMemberId.Location = new System.Drawing.Point(110, 62);
+            this.cboMemberId.Name = "cboMemberId";
+            this.cboMemberId.Size = new System.Drawing.Size(165, 23);
+            this.cboMemberId.TabIndex = 17;
             // 
             // frmOrderInfo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(288, 294);
+            this.Controls.Add(this.cboMemberId);
+            this.Controls.Add(this.dtpShippedDate);
+            this.Controls.Add(this.dtpRequiredDate);
+            this.Controls.Add(this.dtpOrderDate);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.txtFreight);
             this.Controls.Add(this.lbFreight);
-            this.Controls.Add(this.txtShippedDate);
             this.Controls.Add(this.lbShippedDate);
-            this.Controls.Add(this.txtRequiredDate);
             this.Controls.Add(this.lbRequiredDate);
-            this.Controls.Add(this.txtOderDate);
             this.Controls.Add(this.lbOrderDate);
-            this.Controls.Add(this.txtMemberId);
             this.Controls.Add(this.lbMemberId);
             this.Controls.Add(this.txtOrderId);
             this.Controls.Add(this.lbOrderId);
             this.Name = "frmOrderInfo";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Order Info";
+            this.Load += new System.EventHandler(this.frmOrderInfo_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -190,17 +197,17 @@
 
         private Label lbOrderId;
         private TextBox txtOrderId;
-        private TextBox txtMemberId;
         private Label lbMemberId;
-        private TextBox txtOderDate;
         private Label lbOrderDate;
-        private TextBox txtRequiredDate;
         private Label lbRequiredDate;
-        private TextBox txtShippedDate;
         private Label lbShippedDate;
         private TextBox txtFreight;
         private Label lbFreight;
         private Button btnSave;
         private Button btnCancel;
+        private DateTimePicker dtpOrderDate;
+        private DateTimePicker dtpRequiredDate;
+        private DateTimePicker dtpShippedDate;
+        private ComboBox cboMemberId;
     }
 }
