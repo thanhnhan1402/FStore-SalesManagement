@@ -10,7 +10,7 @@ namespace DataAccess.Repository
     public class MemberRepository : IMemberRepository
     {
         public IEnumerable<Member> GetMemberList() => MemberDAO.Instance.GetMemberList();
-        public Member GetMemberByID(int memID)
+        public Member GetMemberByID(Member member)
         {
             throw new NotImplementedException();
         }

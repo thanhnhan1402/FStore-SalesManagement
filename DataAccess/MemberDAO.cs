@@ -36,12 +36,58 @@ namespace DataAccess
             }
             return member;
         }
+        public Member GetMemberByID(Member member)
+        {
+            Member? mem;
+            try
+            {
+                using FStoreASM2Context context = new();
+                mem = context.Members.SingleOrDefault(m => m.MemberId == member.MemberId);
+                if(mem == null)
+                {
+                    throw new Exception("This member does not exist");
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            return mem;
+        }
         public void InsertMember(Member member)
         {
             try
             {
-                FStoreASM2Context Context = new FStoreASM2Context();
+                using FStoreASM2Context Context = new FStoreASM2Context();
                 Context.Members.Add(member);
+                Context.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+        public void UpdateMember(Member member)
+        {
+            try
+            {
+                using FStoreASM2Context Context = new FStoreASM2Context();
+                Context.Entry<Member>(member).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+                Context.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+        public void DeleteMember(Member member)
+        {
+            try
+            {
+                using FStoreASM2Context Context = new FStoreASM2Context();
+                //find member by id
+                var mem = GetMemberByID(member);
+                Context.Members.Remove(mem);
                 Context.SaveChanges();
             }
             catch (Exception ex)
