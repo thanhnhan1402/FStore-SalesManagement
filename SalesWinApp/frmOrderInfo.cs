@@ -31,7 +31,6 @@ namespace SalesWinApp
                 {
                     var order_update = new Order()
                     {
-                        OrderId = Int32.Parse(txtOrderId.Text),
                         MemberId = Int32.Parse(cboMemberId.Text),
                         OrderDate = dtpOrderDate.Value,
                         RequiredDate = dtpRequiredDate.Value,
@@ -48,7 +47,6 @@ namespace SalesWinApp
                 {
                     var new_order = new Order()
                     {
-                        OrderId = Int32.Parse(txtOrderId.Text),
                         MemberId = Int32.Parse(cboMemberId.Text),
                         OrderDate = dtpOrderDate.Value,
                         RequiredDate = dtpRequiredDate.Value,
@@ -73,7 +71,7 @@ namespace SalesWinApp
         private void frmOrderInfo_Load(object sender, EventArgs e)
         {
             cboMemberId.SelectedIndex = 0;
-            txtOrderId.Enabled = !InsertOrUpdate;
+            txtOrderId.Enabled = false;
             if (InsertOrUpdate)
             {
                 txtOrderId.Text = OrderInfo.MemberId.ToString();

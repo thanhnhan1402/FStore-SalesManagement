@@ -146,6 +146,7 @@
             // 
             // dgvMemberList
             // 
+            this.dgvMemberList.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvMemberList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvMemberList.Location = new System.Drawing.Point(31, 228);
             this.dgvMemberList.Name = "dgvMemberList";

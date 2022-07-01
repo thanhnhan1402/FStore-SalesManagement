@@ -25,7 +25,7 @@ namespace SalesWinApp
 
         private void frmMemberInfo_Load(object sender, EventArgs e)
         {
-            txtMemberId.Enabled = !InsertOrUpdate;
+            txtMemberId.Enabled = false;
             if (InsertOrUpdate)
             {
                 txtMemberId.Text = MemberInfo.MemberId.ToString();
@@ -49,7 +49,6 @@ namespace SalesWinApp
                 {
                     var member_update = new Member()
                     {
-                        MemberId = Int32.Parse(txtMemberId.Text),
                         Email = txtEmail.Text,
                         CompanyName = txtCompanyName.Text,
                         City = txtCity.Text,
@@ -66,7 +65,6 @@ namespace SalesWinApp
                 {
                     var new_member = new Member()
                     {
-                        MemberId=Int32.Parse(txtMemberId.Text),
                         Email=txtEmail.Text,
                         CompanyName=txtCompanyName.Text,
                         City=txtCity.Text,

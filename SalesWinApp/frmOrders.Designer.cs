@@ -146,6 +146,7 @@
             // 
             // dgvOrderList
             // 
+            this.dgvOrderList.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvOrderList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvOrderList.Location = new System.Drawing.Point(30, 214);
             this.dgvOrderList.Name = "dgvOrderList";
