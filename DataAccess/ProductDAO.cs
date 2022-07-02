@@ -32,8 +32,8 @@ namespace DataAccess
             var products = new List<Product>();
             try
             {
-                using FStoreASM2Context context = new();
-                context.Products.ToList();
+                using FStoreASM2Context context = new FStoreASM2Context();
+                products = context.Products.ToList();
             }
             catch (Exception ex)
             {
@@ -46,7 +46,7 @@ namespace DataAccess
             Product? pro;
             try
             {
-                using FStoreASM2Context context = new();
+                using FStoreASM2Context context = new FStoreASM2Context();
                 pro = context.Products.SingleOrDefault(p => p.ProductId == product.ProductId);
                 if(pro == null)
                 {
@@ -63,7 +63,7 @@ namespace DataAccess
         {
             try
             {
-                using FStoreASM2Context context = new();
+                using FStoreASM2Context context = new FStoreASM2Context();
                 context.Products.Add(product);
                 context.SaveChanges();
             }
@@ -76,7 +76,7 @@ namespace DataAccess
         {
             try
             {
-                using FStoreASM2Context context = new();
+                using FStoreASM2Context context = new FStoreASM2Context();
                 context.Entry<Product>(product).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
                 context.SaveChanges();
             }
@@ -89,7 +89,7 @@ namespace DataAccess
         {
             try
             {
-                using FStoreASM2Context context = new();
+                using FStoreASM2Context context = new FStoreASM2Context();
                 var pro = GetProductById(product);
                 context.Products.Remove(pro);
                 context.SaveChanges();

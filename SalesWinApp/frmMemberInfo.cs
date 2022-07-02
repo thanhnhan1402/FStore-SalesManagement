@@ -30,7 +30,7 @@ namespace SalesWinApp
             {
                 txtMemberId.Text = MemberInfo.MemberId.ToString();
                 txtEmail.Text = MemberInfo.Email;
-                txtCity.Text = MemberInfo.CompanyName;
+                txtCompanyName.Text = MemberInfo.CompanyName;
                 txtCity.Text = MemberInfo.City;
                 txtCountry.Text = MemberInfo.Country;
                 txtPassword.Text = MemberInfo.Password;
