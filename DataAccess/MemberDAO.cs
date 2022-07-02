@@ -26,9 +26,11 @@ namespace DataAccess
             var member = new List<Member>();
             try
             {
-                using FStoreASM2Context fStore = new FStoreASM2Context();
-                member = fStore.Members.ToList();
-                
+                using FStoreASM2Context fStore = new FStoreASM2Context(); 
+                foreach(Member member2 in fStore.Members.ToList())
+                {
+                    member.Add(member2);
+                }
             }
             catch (Exception ex)
             {
@@ -68,11 +70,16 @@ namespace DataAccess
             }
         }
         public void UpdateMember(Member member)
-        {
+         {
             try
             {
                 using FStoreASM2Context Context = new FStoreASM2Context();
-                Context.Entry<Member>(member).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+                var m = GetMemberByID(member);
+                m.Email = member.Email;
+                m.City = member.City;
+                m.Country = member.Country;
+                m.CompanyName = member.CompanyName;
+                Context.Members.Update(m);
                 Context.SaveChanges();
             }
             catch (Exception ex)
