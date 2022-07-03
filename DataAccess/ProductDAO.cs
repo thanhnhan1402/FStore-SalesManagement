@@ -41,6 +41,8 @@ namespace DataAccess
             }
             return products;
         }
+
+
         public Product GetProductById(Product product)
         {
             Product? pro;
@@ -98,6 +100,30 @@ namespace DataAccess
             {
                 throw new Exception(ex.Message);
             }
+        }
+        public Product GetProductByID(int keyword)
+        {
+            var proList = GetAllProducts();
+            var list = proList.Where(p => p.ProductId == keyword);
+            return list.FirstOrDefault();
+        }
+        public IEnumerable<Product> GetProductsByName(string keyword)
+        {
+            var proList = GetAllProducts();
+            var list = proList.Where(p => p.ProductName.ToLower().Contains(keyword.ToLower()));
+            return list;
+        }
+        public IEnumerable<Product> GetProductsByUnitPrice(int keyword)
+        {
+            var proList = GetAllProducts();
+            var list = proList.Where(p => p.UnitPrice == keyword);
+            return list;
+        }
+        public IEnumerable<Product> GetProductsByUnitsInStock(int keyword)
+        {
+            var proList = GetAllProducts();
+            var list = proList.Where(p => p.UnitsInStock == keyword);
+            return list;
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DataAccess.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -15,6 +16,8 @@ namespace SalesWinApp
         frmMembers frmMembers;
         frmOrders frmOrders;
         frmProducts frmProducts;
+        internal Member loginMember;
+
         public frmMain()
         {
             InitializeComponent();

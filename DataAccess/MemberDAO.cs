@@ -1,4 +1,5 @@
 ﻿using DataAccess.Models;
+using Microsoft.Extensions.Configuration;
 
 namespace DataAccess
 {
@@ -94,6 +95,41 @@ namespace DataAccess
             {
                 throw new Exception(ex.Message);
             }
+        }
+        public Member GetDefaultAccount()
+        {
+            Member account = null;
+            IConfiguration config = new ConfigurationBuilder()
+                                          .SetBasePath(Directory.GetCurrentDirectory())
+                                          .AddJsonFile("appsettings.json", true, true)
+                                          .Build();
+            string email = config["account:email"];
+            string password = config["account:password"];
+            account = new Member
+            {
+                MemberId = 0,
+                Email = email,
+                CompanyName = "",
+                City = "",
+                Country = "",
+                Password = password
+            };
+            return account;
+        }
+        public Member CheckLogin(string email, string password)
+        {
+            Member member = null;
+            Member admin = GetDefaultAccount();
+            if(admin.Email.Equals(email) && admin.Password.Equals(password))
+            {
+                member = admin;
+            }
+            else
+            {
+                using FStoreASM2Context context = new FStoreASM2Context();
+                member = context.Members.SingleOrDefault(m => m.Email.Equals(email) && m.Password.Equals(password));
+            }
+            return member;
         }
     }
 }

@@ -25,7 +25,7 @@ namespace DataAccess.Models
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer("server =(local); database = FStoreASM2;uid=sa;pwd=nhan1402;");
+                optionsBuilder.UseSqlServer("server =LAPTOP-3RHVEV37\\FISHBONE; database = FStoreASM2;uid=sa;pwd=vanhleg123;");
             }
         }
 
