@@ -15,6 +15,8 @@ namespace SalesWinApp
     public partial class frmOrders : Form
     {
         IOrderRepository orderRepository = new OrderRepository();
+        IOrderDetailRepository orderDetailRepository = new OrderDetailRepository();
+        IProductRepository productRepository = new ProductRepository();
         BindingSource source;
         public frmOrders()
         {
@@ -25,6 +27,10 @@ namespace SalesWinApp
         {
             LoadOrderList();
             dgvOrderList.CellDoubleClick += DgvOrderList_CellDoubleClick;
+            foreach (Product product in productRepository.GetAllProducts())
+            {
+                cboProductId.Items.Add(product.ProductId);
+            }
         }
 
         private void DgvOrderList_CellDoubleClick(object? sender, DataGridViewCellEventArgs e)
@@ -143,6 +149,39 @@ namespace SalesWinApp
             } catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Load order list");
+            }
+        }
+
+        private void cbProductId_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cboProductId.Text == "")
+            {
+                txtProductName.Text = "";
+                txtUnitPrice.Text = "";
+            }
+            txtProductName.Text = productRepository.GetProductByID(int.Parse((string)cboProductId.Text)).ProductName;
+
+            txtUnitPrice.Text = productRepository.GetProductByID(int.Parse((string)cboProductId.Text)).UnitPrice.ToString();
+        }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            OrderDetail orderDetail = null;
+            try
+            {
+                orderDetail = new OrderDetail()
+                {
+                    OrderId = int.Parse(txtOrderId.Text),
+                    ProductId = int.Parse((string)cboProductId.Text),
+                    UnitPrice = decimal.Parse(txtUnitPrice.Text),
+                    Quantity = int.Parse(txtQuantity.Text),
+                    Discount = double.Parse(txtDiscount.Text)                   
+                };
+                orderDetailRepository.InsertOrderDetail(orderDetail);
+                MessageBox.Show("Insert order's details successfully", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            } catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Insert OrderDetails");
             }
         }
     }
