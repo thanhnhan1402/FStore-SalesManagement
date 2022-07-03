@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Repository
 {
-    internal class OrderDetailRepository : IOrderDetailRepository
+    public class OrderDetailRepository : IOrderDetailRepository
     {
         public IEnumerable<OrderDetail> GetOrderDetails() => OrderDetailDAO.Instance.GetOrderDetails();
         public OrderDetail GetOrderDetailByID(OrderDetail orderDetail) => OrderDetailDAO.Instance.GetOrderDetailByID(orderDetail);
