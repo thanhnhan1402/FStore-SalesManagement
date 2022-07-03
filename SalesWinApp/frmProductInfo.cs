@@ -48,6 +48,7 @@ namespace SalesWinApp
                 {
                     var product_update = new Product
                     {
+                        ProductId = int.Parse(txtProductId.Text),
                         CategoryId = Int32.Parse(txtCategoryId.Text),
                         ProductName = txtProductName.Text,
                         Weight = txtWeight.Text,
