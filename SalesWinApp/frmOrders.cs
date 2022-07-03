@@ -184,5 +184,11 @@ namespace SalesWinApp
                 MessageBox.Show(ex.Message, "Insert OrderDetails");
             }
         }
+
+        private void btnStatistics_Click(object sender, EventArgs e)
+        {
+            frmStatistics frmStatistics = new frmStatistics();
+            frmStatistics.ShowDialog();
+        }
     }
 }
