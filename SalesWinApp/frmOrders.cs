@@ -91,12 +91,12 @@ namespace SalesWinApp
             {
                 order = new Order
                 {
-                    OrderId = Int32.Parse(txtOrderId.Text),
-                    MemberId = Int32.Parse(txtMemberId.Text),
+                    OrderId = int.Parse(txtOrderId.Text),
+                    MemberId = int.Parse(txtMemberId.Text),
                     OrderDate = DateTime.Parse(txtOrderDate.Text),
                     RequiredDate = DateTime.Parse(txtRequiredDate.Text),
                     ShippedDate = DateTime.Parse(txtShippedDate.Text),
-                    Freight = Decimal.Parse(txtFreight.Text)
+                    Freight = decimal.Parse(txtFreight.Text)
                 };
             } catch (Exception ex)
             {

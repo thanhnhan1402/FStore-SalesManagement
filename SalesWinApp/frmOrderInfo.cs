@@ -18,6 +18,7 @@ namespace SalesWinApp
         {
             InitializeComponent();
         }
+        public IMemberRepository memberRepository = new MemberRepository();    
         public IOrderRepository OrderRepository { get; set; }
         public bool InsertOrUpdate { get; set; }
         public Order OrderInfo { get; set; }
@@ -31,6 +32,7 @@ namespace SalesWinApp
                 {
                     var order_update = new Order()
                     {
+                        OrderId = int.Parse(txtOrderId.Text),
                         MemberId = Int32.Parse(cboMemberId.Text),
                         OrderDate = dtpOrderDate.Value,
                         RequiredDate = dtpRequiredDate.Value,
@@ -69,12 +71,17 @@ namespace SalesWinApp
         private void btnCancel_Click(object sender, EventArgs e) => Close();
 
         private void frmOrderInfo_Load(object sender, EventArgs e)
-        {
+         {
+            foreach(var member in memberRepository.GetMemberList())
+            {
+                cboMemberId.Items.Add(member.MemberId);
+            }
             cboMemberId.SelectedIndex = 0;
             txtOrderId.Enabled = false;
+            cboMemberId.Enabled = !InsertOrUpdate;
             if (InsertOrUpdate)
             {
-                txtOrderId.Text = OrderInfo.MemberId.ToString();
+                txtOrderId.Text = OrderInfo.OrderId.ToString();
                 cboMemberId.Text = OrderInfo.MemberId.ToString();
                 dtpOrderDate.Value = OrderInfo.OrderDate;
                 dtpRequiredDate.Value = (DateTime)OrderInfo.RequiredDate; 
