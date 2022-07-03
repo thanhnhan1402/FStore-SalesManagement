@@ -48,6 +48,7 @@ namespace SalesWinApp
         private void btnLoad_Click(object sender, EventArgs e)
         {
             LoadProductList();
+            txtSearch.Text = string.Empty;
         }
 
         private void btnNew_Click(object sender, EventArgs e)
