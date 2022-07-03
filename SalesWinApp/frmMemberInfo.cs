@@ -7,6 +7,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -43,6 +44,36 @@ namespace SalesWinApp
         private void btnSave_Click(object sender, EventArgs e)
         {
             bool flag = true;
+            if (txtCompanyName.Text == "" || txtEmail.Text == "" || txtPassword.Text == "" || txtCountry.Text == "" || txtCity.Text == "")
+            {
+                MessageBox.Show("Please fill in all fields", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                flag = false;
+            }
+            else if (!Regex.Match(txtCompanyName.Text, "^[a-zA-Z\\s]*$").Success)
+            {
+                MessageBox.Show("Invalid name ", "Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txtCompanyName.Focus();
+                flag = false;
+            }
+            else if (!Regex.Match(txtEmail.Text, "^\\S+@\\S+\\.\\S+$").Success)
+            {
+                MessageBox.Show("Invalid email", "Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txtEmail.Focus();
+                flag = false;
+            }
+            else if (!Regex.Match(txtCity.Text, @"^([a-zA-Z]+|[a-zA-Z]+\s[a-zA-Z]+)$").Success)
+            {
+
+                MessageBox.Show("Invalid city", "Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txtCity.Focus();
+                flag = false;
+            }
+            else if (!Regex.Match(txtCountry.Text, @"^([a-zA-Z]+|[a-zA-Z]+\s[a-zA-Z]+)$").Success)
+            {
+                MessageBox.Show("Invalid country", "Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txtCountry.Focus();
+                flag = false;
+            }
             try
             {
                 if (InsertOrUpdate)
