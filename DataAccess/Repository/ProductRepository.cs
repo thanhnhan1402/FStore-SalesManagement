@@ -14,5 +14,9 @@ namespace DataAccess.Repository
         public void InsertProduct(Product product) => ProductDAO.Instance.InsertProduct(product);
         public void UpdateProduct(Product product) => ProductDAO.Instance.UpdateProduct(product);
         public void DeleteProduct(Product product) => ProductDAO.Instance.DeleteProduct(product);
+        public IEnumerable<Product> GetProductsByName(string keyword) => ProductDAO.Instance.GetProductsByName(keyword);
+        public IEnumerable<Product> GetProductsByUnitPrice(int keyword) => ProductDAO.Instance.GetProductsByUnitPrice(keyword);
+        public IEnumerable<Product> GetProductsByUnitsInStock(int keyword) => ProductDAO.Instance.GetProductsByUnitsInStock(keyword);
+        public Product GetProductByID(int keyword) => ProductDAO.Instance.GetProductByID(keyword);
     }
 }

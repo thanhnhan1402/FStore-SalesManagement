@@ -14,11 +14,15 @@ namespace SalesWinApp
 {
     public partial class frmProducts : Form
     {
+        IEnumerable<Product> proList;
         IProductRepository productRepository = new ProductRepository();
+        int id, unitPrice, units_in_stock; 
+        bool isNumber;
         BindingSource source;
         public frmProducts()
-        {
+        {     
             InitializeComponent();
+            rdID.Checked = true;
         }
 
         private void frmProducts_Load(object sender, EventArgs e)
@@ -74,7 +78,60 @@ namespace SalesWinApp
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
-
+            var keyword = txtSearch.Text;
+            var list = new List<Product>();
+            if(rdName.Checked)
+            {
+                proList = productRepository.GetProductsByName(keyword);
+                LoadSearchProductsList(proList); 
+            }
+            else if(rdID.Checked)
+            {
+                isNumber = Int32.TryParse(keyword, out id);
+                if (!isNumber)
+                {
+                    MessageBox.Show("ID must be a number", "Wrong input", MessageBoxButtons.OK);
+                }
+                else
+                {
+                    var product = productRepository.GetProductByID(id);
+                    if(product == null)
+                    {
+                        MessageBox.Show("Product does not exist", "Search failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    else
+                    {
+                        list.Add(product);
+                        LoadSearchProductsList(list);
+                    }
+                }
+            }
+            else if(rdUnitPrice.Checked)
+            {
+                isNumber = Int32.TryParse(keyword, out unitPrice);
+                if (!isNumber)
+                {
+                    MessageBox.Show("Unit price must be a number", "Wrong input", MessageBoxButtons.OK);
+                }
+                else
+                {
+                    proList = productRepository.GetProductsByUnitPrice(unitPrice);
+                    LoadSearchProductsList(proList);
+                }
+            }
+            else if(rdUnitsInStock.Checked)
+            {
+                isNumber = Int32.TryParse(keyword, out units_in_stock);
+                if (!isNumber)
+                {
+                    MessageBox.Show("Unit in stock must be a number", "Wrong input", MessageBoxButtons.OK);
+                }
+                else
+                {
+                    proList = productRepository.GetProductsByUnitsInStock(units_in_stock);
+                    LoadSearchProductsList(proList);
+                }
+            }
         }
 
         private void btnClose_Click(object sender, EventArgs e) => Close();
@@ -110,6 +167,7 @@ namespace SalesWinApp
             return product;
         }
 
+
         private void LoadProductList()
         {
             var products = productRepository.GetAllProducts();
@@ -144,6 +202,46 @@ namespace SalesWinApp
                     btnDelete.Enabled = true;
                 }
             } catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Load product list");
+            }
+        }
+        private void LoadSearchProductsList(IEnumerable<Product> proList)
+        {
+            dgvProductList.DataSource = null;
+            try
+            {
+                source = new BindingSource();
+                source.DataSource = proList;
+
+                txtProductId.DataBindings.Clear();
+                txtCategoryId.DataBindings.Clear();
+                txtProductName.DataBindings.Clear();
+                txtWeight.DataBindings.Clear();
+                txtUnitPrice.DataBindings.Clear();
+                txtUnitsInStock.DataBindings.Clear();
+
+                if(proList.Count() > 0)
+                {
+                    txtProductId.DataBindings.Add("Text", source, "ProductId");
+                    txtCategoryId.DataBindings.Add("Text", source, "CategoryId");
+                    txtProductName.DataBindings.Add("Text", source, "ProductName");
+                    txtWeight.DataBindings.Add("Text", source, "Weight");
+                    txtUnitPrice.DataBindings.Add("Text", source, "UnitPrice");
+                    txtUnitsInStock.DataBindings.Add("Text", source, "UnitsInStock");
+
+                    btnDelete.Enabled = true;
+
+                    dgvProductList.DataSource = source;
+                }
+                else
+                {
+                    ClearText();
+                    btnDelete.Enabled = false;
+                    MessageBox.Show("Product does not exist", "Search failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Load product list");
             }

@@ -14,5 +14,9 @@ namespace DataAccess.Repository
         void InsertProduct(Product product);
         void UpdateProduct(Product product);
         void DeleteProduct(Product product);
+        Product GetProductByID(int keyword);
+        IEnumerable<Product> GetProductsByName(string keyword);
+        IEnumerable<Product> GetProductsByUnitPrice(int keyword);
+        IEnumerable<Product> GetProductsByUnitsInStock(int keyword);
     }
 }
