@@ -74,12 +74,7 @@ namespace DataAccess
             try
             {
                 using FStoreASM2Context Context = new FStoreASM2Context();
-                var m = GetMemberByID(member);
-                m.Email = member.Email;
-                m.City = member.City;
-                m.Country = member.Country;
-                m.CompanyName = member.CompanyName;
-                Context.Members.Update(m);
+                Context.Entry<Member>(member).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
                 Context.SaveChanges();
             }
             catch (Exception ex)

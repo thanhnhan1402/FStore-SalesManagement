@@ -32,8 +32,11 @@ namespace DataAccess
             var products = new List<Product>();
             try
             {
-                using FStoreASM2Context context = new();
-                context.Products.ToList();
+                using FStoreASM2Context context = new FStoreASM2Context();
+                foreach(Product pro in context.Products.ToList())
+                {
+                    products.Add(pro);
+                }
             }
             catch (Exception ex)
             {
