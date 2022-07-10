@@ -57,7 +57,7 @@ namespace SalesWinApp
             }
             else if (!Regex.Match(txtCompanyName.Text, "^[a-zA-Z\\s]*$").Success)
             {
-                MessageBox.Show("Invalid name ", "Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Invalid Company name", "Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 txtCompanyName.Focus();
                 flag = false;
             }
@@ -67,7 +67,7 @@ namespace SalesWinApp
                 txtEmail.Focus();
                 flag = false;
             }
-            else if (!Regex.Match(txtCity.Text, @"^([a-zA-Z]+|[a-zA-Z]+\s[a-zA-Z]+)$").Success)
+            else if (!Regex.Match(txtCity.Text, "^[a-zA-Z\\s]*$").Success)
             {
 
                 MessageBox.Show("Invalid city", "Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
