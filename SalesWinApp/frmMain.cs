@@ -76,5 +76,12 @@ namespace SalesWinApp
             frmOrders.MdiParent = this;
             frmOrders.Show();
         }
+
+        private void logoutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            frmLogin frmLogin = new frmLogin();
+            frmLogin.Show();
+        }
     }
 }
