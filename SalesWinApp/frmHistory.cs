@@ -22,7 +22,6 @@ namespace SalesWinApp
         private void frmHistory_Load(object sender, EventArgs e)
         {
             dgvHistory.DataSource = orderRepository.GetHistory(MemberId);
-            dgvHistory.Columns["Member"].Visible = false;
         }
     }
 
