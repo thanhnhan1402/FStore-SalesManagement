@@ -14,5 +14,9 @@ namespace DataAccess.Repository
         public void InsertOrder(Order order) => OrderDAO.Instance.InsertOrder(order);
         public void UpdateOrder(Order order) => OrderDAO.Instance.UpdateOrder(order);
         public void DeleteOrder(Order order) => OrderDAO.Instance.DeleteOrder(order);
+        public IEnumerable<Order> GetStatistics(DateTime orderDate, DateTime shippedDate)
+        => OrderDAO.Instance.GetStatistics(orderDate, shippedDate);
+        public IEnumerable<Order> GetSortedOrderList() => OrderDAO.Instance.GetSortedOrderList();
+        public IEnumerable<Order> GetHistory(int memberId) => OrderDAO.Instance.GetHistory(memberId);
     }
 }
