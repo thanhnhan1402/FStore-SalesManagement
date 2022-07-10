@@ -1,4 +1,5 @@
 ﻿using DataAccess.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -39,6 +40,50 @@ namespace DataAccess
                 throw new Exception(ex.Message);
             }
             return Order;
+        }
+
+        public IEnumerable<Order> GetStatistics(DateTime orderDate, DateTime shippedDate)
+        {
+            var statistics = new List<Order>();
+            try
+            {
+                using FStoreASM2Context fStore = new FStoreASM2Context();
+                statistics = fStore.Orders.Where(o => o.OrderDate >= orderDate && o.ShippedDate <= shippedDate).ToList();
+            } catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            return statistics;
+        }
+
+        public IEnumerable<Order> GetSortedOrderList()
+        {
+            var Order = new List<Order>();
+            try
+            {
+                using FStoreASM2Context fStore = new FStoreASM2Context();
+                Order = fStore.Orders.OrderByDescending(o => o.OrderDate).ToList();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            return Order;
+        }
+        public IEnumerable<Order> GetHistory(int memberId)
+        {
+            var history = new List<Order>();
+            try
+            {
+                using FStoreASM2Context fStore = new FStoreASM2Context();
+                history = fStore.Orders.Where(o => o.MemberId == memberId)
+                    .Include(d => d.OrderDetails)
+                    .ToList();
+            } catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            return history;
         }
         public Order GetOrderByID(Order order)
         {
