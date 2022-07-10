@@ -14,6 +14,7 @@ namespace SalesWinApp
 {
     public partial class frmMembers : Form
     {
+        public Member loginMember { get; set; }
         IMemberRepository memberRepository = new MemberRepository();
         BindingSource source;
         public frmMembers()
@@ -34,6 +35,7 @@ namespace SalesWinApp
                 Text = "Update car",
                 InsertOrUpdate = true,
                 MemberInfo = GetMemberObject(),
+                LoginMember = loginMember,
                 MemberRepository = memberRepository
             };
             frmMemberInfo.ShowDialog();
@@ -52,6 +54,7 @@ namespace SalesWinApp
             {
                 Text = "Create member",
                 InsertOrUpdate = false,
+                LoginMember = loginMember, 
                 MemberRepository = memberRepository
             };
             frmMemberInfo.ShowDialog();

@@ -190,5 +190,47 @@ namespace SalesWinApp
             frmStatistics frmStatistics = new frmStatistics();
             frmStatistics.ShowDialog();
         }
+
+        private void btnSort_Click(object sender, EventArgs e)
+        {
+            var orders = orderRepository.GetSortedOrderList();
+            try
+            {
+                source = new BindingSource();
+                source.DataSource = orders;
+
+                txtOrderId.DataBindings.Clear();
+                txtMemberId.DataBindings.Clear();
+                txtOrderDate.DataBindings.Clear();
+                txtRequiredDate.DataBindings.Clear();
+                txtShippedDate.DataBindings.Clear();
+                txtFreight.DataBindings.Clear();
+
+                txtOrderId.DataBindings.Add("Text", source, "OrderId");
+                txtMemberId.DataBindings.Add("Text", source, "MemberId");
+                txtOrderDate.DataBindings.Add("Text", source, "OrderDate");
+                txtRequiredDate.DataBindings.Add("Text", source, "RequiredDate");
+                txtShippedDate.DataBindings.Add("Text", source, "ShippedDate");
+                txtFreight.DataBindings.Add("Text", source, "Freight");
+
+                dgvOrderList.DataSource = null;
+                dgvOrderList.DataSource = source;
+
+                if (orders.Count() == 0)
+                {
+                    ClearText();
+                    btnDelete.Enabled = false;
+                }
+                else
+                {
+                    btnDelete.Enabled = true;
+                }
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Load sorted order list");
+            }
+        }   
     }
 }

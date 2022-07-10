@@ -23,10 +23,15 @@ namespace SalesWinApp
         public IMemberRepository MemberRepository { get; set; }
         public bool InsertOrUpdate { get; set; } //False : Insert, True : Update
         public Member MemberInfo { get; set; }
+        public Member LoginMember { get; set; }
 
         private void frmMemberInfo_Load(object sender, EventArgs e)
         {
             txtMemberId.Enabled = false;
+            if (LoginMember.Email.Equals("admin@fstore.com"))
+            {
+                btnHistory.Enabled = false;
+            }
             if (InsertOrUpdate)
             {
                 txtMemberId.Text = MemberInfo.MemberId.ToString();
@@ -35,10 +40,11 @@ namespace SalesWinApp
                 txtCity.Text = MemberInfo.City;
                 txtCountry.Text = MemberInfo.Country;
                 txtPassword.Text = MemberInfo.Password;
-            } else
-            {
-                btnSave.Text = "Create";
             }
+            else
+            {
+                  btnSave.Text = "Create";
+            }                    
         }
 
         private void btnSave_Click(object sender, EventArgs e)
@@ -117,5 +123,14 @@ namespace SalesWinApp
         }
 
         private void btnCancel_Click(object sender, EventArgs e) => Close();
+
+        private void btnHistory_Click(object sender, EventArgs e)
+        {
+            frmHistory frmHistory = new frmHistory()
+            {
+                MemberId = MemberInfo.MemberId
+            };
+            frmHistory.ShowDialog();
+        }
     }
 }

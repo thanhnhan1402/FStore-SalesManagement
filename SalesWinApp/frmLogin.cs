@@ -52,6 +52,7 @@ namespace SalesWinApp
                         {
                             Text = "Member Info",
                             MemberInfo = loginMember,
+                            LoginMember = loginMember,
                             InsertOrUpdate = true,
                             MemberRepository = memberRepository
                         };

@@ -16,7 +16,7 @@ namespace SalesWinApp
         frmMembers frmMembers;
         frmOrders frmOrders;
         frmProducts frmProducts;
-        internal Member loginMember;
+        public Member loginMember;
 
         public frmMain()
         {
@@ -35,7 +35,10 @@ namespace SalesWinApp
             //{
             //    frmMembers.Activate();
             //}
-            frmMembers = new frmMembers();
+            frmMembers = new frmMembers()
+            {
+                loginMember = loginMember
+            };
             frmMembers.MdiParent = this;
             frmMembers.Show();
         }

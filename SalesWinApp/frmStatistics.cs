@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DataAccess.Repository;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,6 +13,7 @@ namespace SalesWinApp
 {
     public partial class frmStatistics : Form
     {
+        IOrderRepository orderRepository = new OrderRepository();
         public frmStatistics()
         {
             InitializeComponent();
@@ -20,7 +22,11 @@ namespace SalesWinApp
         #region events
         private void btnReport_Click(object sender, EventArgs e)
         {
-
+            DateTime orderDate = dtOrderDate.Value;
+            DateTime shippedDate = dtShippedDate.Value;
+            dgvSalesList.DataSource = orderRepository.GetStatistics(orderDate, shippedDate);
+            dgvSalesList.Columns["Member"].Visible = false;
+            dgvSalesList.Columns["OrderDetails"].Visible = false;
         }
 
         #endregion
