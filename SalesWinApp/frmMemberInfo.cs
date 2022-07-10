@@ -69,7 +69,6 @@ namespace SalesWinApp
             }
             else if (!Regex.Match(txtCity.Text, @"^([a-zA-Z]+|[a-zA-Z]+\s[a-zA-Z]+)$").Success)
             {
-
                 MessageBox.Show("Invalid city", "Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 txtCity.Focus();
                 flag = false;
